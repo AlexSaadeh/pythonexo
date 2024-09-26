@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "alexsaadehcheckio"
+name = "checkio"
 version = "0.1.0"
 description = "first steps into converting my python code into python project"
 authors = ["AlexSaadeh <alexsaade.lb@hotmail.com>"]
