@@ -14,15 +14,15 @@ jobs:
     runs-on: ubuntu-latest  # Use the latest Ubuntu environment
 
     steps:
-      # Step 1: Check out the repository (updated to v3)
+      # Step 1: Check out the repository
       - name: Check out the repository
         uses: actions/checkout@v3
 
-      # Step 2: Set up Python (updated to v4)
+      # Step 2: Set up Python (use Python 3.12 or higher)
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.8'  # You can change the Python version if needed
+          python-version: '3.12'  # Update this to match your project's required version
 
       # Step 3: Install Poetry
       - name: Install Poetry
@@ -30,7 +30,7 @@ jobs:
           curl -sSL https://install.python-poetry.org | python3 -
           echo "$HOME/.local/bin" >> $GITHUB_PATH
 
-      # Step 4: Install dependencies
+      # Step 4: Install dependencies using Poetry
       - name: Install dependencies
         run: |
           poetry install
@@ -54,7 +54,7 @@ jobs:
 
       # Step 7: Upload coverage results as artifacts (useful for later access)
       - name: Upload coverage report
-        uses: actions/upload-artifact@v3  # Updated to v3
+        uses: actions/upload-artifact@v3
         with:
           name: coverage-report
           path: htmlcov/  # Assuming the coverage report is saved in the 'htmlcov' folder
