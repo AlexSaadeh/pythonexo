@@ -9,6 +9,9 @@ on:
     branches:
       - main  # Run tests on pull requests to the 'main' branch
 
+permissions:
+  contents: write  # Allow the workflow to push changes to the repository
+
 jobs:
   test:
     runs-on: ubuntu-latest  # Use the latest Ubuntu environment
