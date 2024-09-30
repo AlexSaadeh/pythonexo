@@ -48,9 +48,9 @@ jobs:
           echo "![Coverage Badge](https://img.shields.io/badge/Coverage-$COVERAGE-brightgreen)" > coverage_badge.md
           git config --local user.email "your-email@example.com"
           git config --local user.name "Your Name"
-          git add coverage_badge.md --allow-empty
+          git add coverage_badge.md
           git commit -m "Update coverage badge" || echo "No changes to commit"
-          git push
+          git push || echo "No changes to push"
 
       - name: Upload coverage report
         uses: actions/upload-artifact@v3
