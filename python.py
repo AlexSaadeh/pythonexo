@@ -1,37 +1,32 @@
-# write your code here
-a=2
-b=5
+"""This module contains several mathematical functions and operations."""
 
-add=a+b
-multi=a*b
-# write your code here
-def func():
-    pass
+# Constants
+A = 2
+B = 5
 
-# Taken from mission Empty Function
+# Calculate sum and product of constants
+ADD = A + B
+MULTI = A * B
 
-# write your code here
-def func(value):
+def identity_function(value):
+    """Returns the input value."""
     return value
 
-
-
 print("Example:")
-print(func(3))
+print(identity_function(3))
 
 # These "asserts" are used for self-checking
-assert func(3) == 3
-assert func("string") == "string"
-assert func(True) == True
+assert identity_function(3) == 3
+assert identity_function("string") == "string"
+assert identity_function(True) is True
 
 print("The mission is done! Click 'Check Solution' to earn rewards!")
 
-def mult_two(a: int, b: int):
-    
-    return a*b
+def mult_two(a: int, b: int) -> int:
+    """Returns the product of two numbers."""
+    return a * b
 
-
-print("Example")
+print("Example:")
 print(mult_two(1, 2))
 
 assert mult_two(3, 2) == 6
@@ -40,9 +35,8 @@ assert mult_two(0, 1) == 0
 print("The first mission is done! Click 'Check' to earn cool rewards!")
 
 def rectangle_perimeter(length: int, width: int) -> int:
-    # your code here
-    return length*2 + width*2
-
+    """Returns the perimeter of a rectangle."""
+    return 2 * (length + width)
 
 print("Example:")
 print(rectangle_perimeter(3, 2))
@@ -61,28 +55,27 @@ assert rectangle_perimeter(0.5, 2) == 5
 print("The mission is done! Click 'Check Solution' to earn rewards!")
 
 def is_even(num: int) -> bool:
-    
-    return num%2==0
-
+    """Determines if a number is even."""
+    return num % 2 == 0
 
 print("Example:")
 print(is_even(2))
 
 # These "asserts" are used for self-checking
-assert is_even(2) == True
-assert is_even(5) == False
-assert is_even(0) == True
+assert is_even(2) is True
+assert is_even(5) is False
+assert is_even(0) is True
 
 print("The mission is done! Click 'Check Solution' to earn rewards!")
 
 def determine_sign(num: int) -> str:
+    """Determines the sign of a number."""
     if num < 0:
         return "negative"
     elif num > 0:
         return "positive"
     else:
         return "zero"
-
 
 print("Example:")
 print(determine_sign(11))
@@ -102,9 +95,8 @@ assert determine_sign(2) == "positive"
 print("The mission is done! Click 'Check Solution' to earn rewards!")
 
 def find_remainder(dividend: int, divisor: int) -> int:
-    a=dividend%divisor 
-    return a
-
+    """Returns the remainder of the division of dividend by divisor."""
+    return dividend % divisor
 
 print("Example:")
 print(find_remainder(3, 2))
