@@ -1,63 +1,59 @@
 name: Python Tests
 
-# Define the events that trigger this workflow
 on:
   push:
     branches:
-      - main  # Run tests on push to the 'main' branch
+      - main
   pull_request:
     branches:
-      - main  # Run tests on pull requests to the 'main' branch
+      - main
 
 permissions:
-  contents: write  # Allow the workflow to push changes to the repository
+  contents: write
 
 jobs:
   test:
-    runs-on: ubuntu-latest  # Use the latest Ubuntu environment
+    runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Check out the repository
       - name: Check out the repository
         uses: actions/checkout@v3
 
-      # Step 2: Set up Python (use Python 3.12 or higher)
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.12'  # Update this to match your project's required version
+          python-version: '3.12'
 
-      # Step 3: Install Poetry
       - name: Install Poetry
         run: |
           curl -sSL https://install.python-poetry.org | python3 -
           echo "$HOME/.local/bin" >> $GITHUB_PATH
 
-      # Step 4: Install dependencies using Poetry
+      - name: Clean up __pycache__
+        run: |
+          find . -name "__pycache__" -exec rm -rf {} +
+
       - name: Install dependencies
         run: |
           poetry install
 
-      # Step 5: Run tests with coverage
       - name: Run tests with coverage
         run: |
-          poetry run coverage run -m pytest  # Run tests with coverage
-          poetry run coverage report -m      # Print coverage report
+          poetry run coverage run -m pytest
+          poetry run coverage report -m
 
-      # Step 6: Generate a coverage badge (optional)
       - name: Generate coverage badge
         run: |
           COVERAGE=$(poetry run coverage report --show-missing | grep -oE '[0-9]+%' | head -n 1)
           echo "![Coverage Badge](https://img.shields.io/badge/Coverage-$COVERAGE-brightgreen)" > coverage_badge.md
           git config --local user.email "your-email@example.com"
           git config --local user.name "Your Name"
-          git add coverage_badge.md
-          git commit -m "Update coverage badge"
+          git add coverage_badge.md --allow-empty
+          git commit -m "Update coverage badge" || echo "No changes to commit"
           git push
 
-      # Step 7: Upload coverage results as artifacts (useful for later access)
       - name: Upload coverage report
         uses: actions/upload-artifact@v3
         with:
           name: coverage-report
-          path: htmlcov/  # Assuming the coverage report is saved in the 'htmlcov' folder
+          path: htmlcov/
